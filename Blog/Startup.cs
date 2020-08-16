@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Blog.Data;
+using Blog.Data.FileManager;
 using Blog.Data.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -27,7 +28,7 @@ namespace Blog
         {
             //DB connection
             services.AddDbContext<AppDbContext>(options => options.UseSqlServer(_config["DefaultConnection"]));
-            
+
             //Add authentication
             services.AddIdentity<IdentityUser, IdentityRole>(options =>
             {
@@ -44,8 +45,12 @@ namespace Blog
             {
                 options.LoginPath = "/Auth/Login";
             });
+
             //Add Irepository as service
             services.AddTransient<IRepository, Repository>();
+            //make programe aware of filemanager
+            services.AddTransient<IFileManager, FileManager>();
+
             //Add MVC as service
             services.AddMvc();
         }

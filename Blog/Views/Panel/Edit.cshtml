@@ -1,11 +1,11 @@
-﻿@model Post
+﻿@model PostViewModel
 
 @{
 
 }
 
 <div>
-    <form asp-controller="Panel" asp-action="Edit" method="post">
+    <form asp-controller="Panel" asp-action="Edit" method="post" enctype="multipart/form-data">
         <input type="hidden" asp-for="Id" />
         <div>
             <label>Title</label>
