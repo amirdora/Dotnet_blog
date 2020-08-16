@@ -29,10 +29,21 @@ namespace Blog
             services.AddDbContext<AppDbContext>(options => options.UseSqlServer(_config["DefaultConnection"]));
             
             //Add authentication
-            services.AddDefaultIdentity<IdentityUser>()
-                .AddRoles<IdentityRole>()
-                .AddEntityFrameworkStores<AppDbContext>();
+            services.AddIdentity<IdentityUser, IdentityRole>(options =>
+            {
+                options.Password.RequireDigit = false;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequiredLength = 6;
 
+            })
+                //.AddRoles<IdentityRole>()
+                .AddEntityFrameworkStores<AppDbContext>();
+            //redirect auth 
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.LoginPath = "/Auth/Login";
+            });
             //Add Irepository as service
             services.AddTransient<IRepository, Repository>();
             //Add MVC as service
@@ -46,6 +57,8 @@ namespace Blog
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseStaticFiles();
 
             //authentication
             app.UseAuthentication();

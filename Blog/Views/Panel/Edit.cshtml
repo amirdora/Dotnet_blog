@@ -5,8 +5,8 @@
 }
 
 <div>
-    <form asp-controller="Home" asp-action="Edit" method="post">
-        <input type="hidden" asp-for="Id"/>
+    <form asp-controller="Panel" asp-action="Edit" method="post">
+        <input type="hidden" asp-for="Id" />
         <div>
             <label>Title</label>
             <input asp-for="Title" />
@@ -14,6 +14,10 @@
         <div>
             <label>Body</label>
             <input asp-for="Body" />
+        </div>
+        <div>
+            <label>Image</label>
+            <input asp-for="Image" />
         </div>
         <input type="submit" value="Submit" />
     </form>

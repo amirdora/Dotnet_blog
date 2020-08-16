@@ -27,5 +27,7 @@ C:\Users\Amirdora\source\repos\Blog\Blog\obj\Debug\netcoreapp2.1\Blog.Views.pdb
 C:\Users\Amirdora\source\repos\Blog\Blog\obj\Debug\netcoreapp2.1\Blog.csproj.CopyComplete
 C:\Users\Amirdora\source\repos\Blog\Blog\obj\Debug\netcoreapp2.1\Razor\Views\Home\Post.cshtml.g.cs
 C:\Users\Amirdora\source\repos\Blog\Blog\obj\Debug\netcoreapp2.1\Razor\Views\_ViewImports.cshtml.g.cs
-C:\Users\Amirdora\source\repos\Blog\Blog\obj\Debug\netcoreapp2.1\Razor\Views\Home\Edit.cshtml.g.cs
 C:\Users\Amirdora\source\repos\Blog\Blog\bin\Debug\netcoreapp2.1\appsettings.json
+C:\Users\Amirdora\source\repos\Blog\Blog\obj\Debug\netcoreapp2.1\Razor\Views\Auth\Login.cshtml.g.cs
+C:\Users\Amirdora\source\repos\Blog\Blog\obj\Debug\netcoreapp2.1\Razor\Views\Panel\Index.cshtml.g.cs
+C:\Users\Amirdora\source\repos\Blog\Blog\obj\Debug\netcoreapp2.1\Razor\Views\Panel\Edit.cshtml.g.cs
