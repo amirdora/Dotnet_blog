@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Blog.Data.FileManager;
 using Blog.Data.Repository;
 using Blog.Models;
 using Blog.ViewModels;
@@ -14,10 +15,12 @@ namespace Blog.Controllers
     public class PanelController : Controller
     {
         private IRepository _repo;
+        private IFileManager _fileMgr;
 
-        public PanelController(IRepository Repo)
+        public PanelController(IRepository Repo, IFileManager fileMgr)
         {
             _repo = Repo;
+            _fileMgr = fileMgr;
 
         }
 
@@ -27,7 +30,7 @@ namespace Blog.Controllers
             return View(posts);
         }
         [HttpGet]
-        public IActionResult Edit(int id)
+        public IActionResult Edit(int? id)
         {
 
             if (id == null)
@@ -53,7 +56,7 @@ namespace Blog.Controllers
                 Id = vm.Id,
                 Title = vm.Title,
                 Body = vm.Body,
-                Image = "" // handle image
+                Image = await _fileMgr.SaveImage(vm.Image)
             };
 
             if (post.Id > 0)
