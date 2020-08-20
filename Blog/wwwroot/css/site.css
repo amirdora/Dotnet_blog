@@ -55,6 +55,7 @@ nav {
     position: relative;
     height: 400px;
     display: flex;
+    margin-bottom:10px;
 }
 
     .post img {
@@ -66,4 +67,7 @@ nav {
 .post-body {
     margin: -5px 5px 0;
     background-color: white;
+    padding:5px;
+    border-bottom-left-radius:5px;
+    border-bottom-right-radius: 5px;
 }
