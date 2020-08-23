@@ -21,9 +21,9 @@ namespace Blog.Controllers
             _fileMgr = fileMgr;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(string Category)
         {
-            var posts = _repo.GetAllPost();
+            var posts = string.IsNullOrEmpty(Category)? _repo.GetAllPost(): _repo.GetAllPost(Category);
             return View(posts);
         }
         public IActionResult Post(int id)

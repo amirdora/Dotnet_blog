@@ -5,13 +5,18 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewBag.Title</title>
+    <meta name="description" content="@ViewBag.Description" />
+    <meta name="keywords" content="@ViewBag.Keywords" />
+
     <link href="~/css/site.css" rel="stylesheet" />
 </head>
 <body>
     <div>
         <nav>
             <a asp-controller="Home" asp-action="Index">Home</a>
-            <a asp-controller="Panel" asp-action="Edit">Create Post</a>
+            <a asp-controller="Home" asp-route-Category="Travel">Travel</a>
+            <a asp-controller="Home" asp-route-Category="Programming">Programming</a>
+            <a asp-controller="Home" asp-route-Category="Photography">Photography</a>
             <a asp-controller="Panel" asp-action="Index">Admin Panel</a>
 
             @if (User.Identity.IsAuthenticated)

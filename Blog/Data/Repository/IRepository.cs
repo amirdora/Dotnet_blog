@@ -10,6 +10,7 @@ namespace Blog.Data.Repository
     {
         Post GetPost(int id);
         List<Post> GetAllPost();
+        List<Post> GetAllPost(string Category);
         void AddPost(Post post);
         void UpdatePost(Post post);
         void RemovePost(int id);
