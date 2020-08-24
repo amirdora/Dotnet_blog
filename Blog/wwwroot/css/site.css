@@ -72,3 +72,24 @@ nav {
     border-bottom-left-radius:5px;
     border-bottom-right-radius: 5px;
 }
+
+.pages {
+    display:flex;
+    flex-direction:row;
+    justify-content:center;
+    margin:2rem;
+}
+.pages a{
+    background-color: #939393;
+    color:white;
+    padding: 1rem;
+    margin: 0.25rem;
+}
+    .pages a:hover {
+        background-color: #8e8e8e;
+        text-decoration: none;
+    }
+    .pages a.active {
+        background-color: #a5a5a5;
+        text-decoration: none;
+    }

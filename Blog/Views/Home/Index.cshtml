@@ -26,14 +26,24 @@
         </div>
     }
 
-<div>
-    @if (Model.PageNumber > 1)
-    {
-        <a asp-action="Index" asp-route-Category="@Model.Category" asp-controller="Home" asp-route-PageNumber="@(Model.PageNumber-1)">Previous Page</a>
-    }
-    @if(Model.NextPage){
-    <a asp-action="Index" asp-route-Category="@Model.Category" asp-controller="Home" asp-route-PageNumber="@(Model.PageNumber+1)">Next Page</a>
-    }
-</div>
+    <div class="pages">
+        @if (Model.PageNumber > 1)
+        {
+            <a asp-action="Index" asp-route-Category="@Model.Category" asp-controller="Home" asp-route-PageNumber="@(Model.PageNumber-1)"><</a>
+        }
+
+        @for (int i = 1; i <= Model.PageCount; i++)
+        {
+            // if i is equal to page number set class to active other leave as empty
+
+            <a class="@(i == Model.PageNumber ? "active" : "")" asp-action="Index" asp-route-Category="@Model.Category" asp-controller="Home" asp-route-PageNumber="@i">@i</a>
+
+        }
+
+        @if (Model.NextPage)
+        {
+            <a asp-action="Index" asp-route-Category="@Model.Category" asp-controller="Home" asp-route-PageNumber="@(Model.PageNumber+1)">></a>
+        }
+    </div>
 
 </div>
