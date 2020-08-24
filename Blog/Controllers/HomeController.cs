@@ -2,6 +2,7 @@
 using Blog.Data.FileManager;
 using Blog.Data.Repository;
 using Blog.Models;
+using Blog.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -21,10 +22,16 @@ namespace Blog.Controllers
             _fileMgr = fileMgr;
         }
 
-        public IActionResult Index(string Category)
+        public IActionResult Index(int PageNumber, string Category)
         {
-            var posts = string.IsNullOrEmpty(Category)? _repo.GetAllPost(): _repo.GetAllPost(Category);
-            return View(posts);
+            if (PageNumber < 1)
+            {
+                return RedirectToAction("Index", new { PageNumber = 1, Category });
+            }
+
+            var vm = _repo.GetAllPost(PageNumber, Category);
+
+            return View(vm);
         }
         public IActionResult Post(int id)
         {

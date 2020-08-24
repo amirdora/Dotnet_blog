@@ -1,4 +1,5 @@
 ﻿using Blog.Models;
+using Blog.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,35 +26,57 @@ namespace Blog.Data.Repository
         {
             return _ctx.Posts.ToList();
         }
-        public List<Post> GetAllPost(string Category)
-        {
-            var Posts = _ctx.Posts.Where(p => p.Category.ToLower().Equals(Category.ToLower())).ToList();
-            return Posts;
-        }
-        public Post GetPost(int id)
-        {
-            return _ctx.Posts.FirstOrDefault(m => m.Id == id);
-        }
 
-        public void RemovePost(int id)
+        public IndexViewModel GetAllPost(int PageNumber, string Category)
         {
-            _ctx.Posts.Remove(GetPost(id));
-        }
+            Func<Post, bool> InCategory = (post) => { return post.Category.ToLower().Equals(Category.ToLower()); };
 
-        public void UpdatePost(Post post)
+            int pageSize = 2;
+            int skipAmount = pageSize * (PageNumber - 1);
+            var query = _ctx.Posts.AsQueryable(); // take only 2 posts
+
+            if (!String.IsNullOrEmpty(Category))
+            {
+                query = query.Where(x => InCategory(x));
+            }
+
+            int postsCount = query.Count();
+
+            return new IndexViewModel
+            {
+                PageNumber = PageNumber,
+                NextPage = postsCount > skipAmount + pageSize,
+                Category = Category,
+                Posts = query
+                    .Skip(skipAmount)
+                    .Take(pageSize)
+                    .ToList()
+            };
+    }
+    public Post GetPost(int id)
+    {
+        return _ctx.Posts.FirstOrDefault(m => m.Id == id);
+    }
+
+    public void RemovePost(int id)
+    {
+        _ctx.Posts.Remove(GetPost(id));
+    }
+
+    public void UpdatePost(Post post)
+    {
+        _ctx.Posts.Update(post);
+    }
+    public async Task<bool> SaveChangesAsync()
+    {
+        if (await _ctx.SaveChangesAsync() > 0)
         {
-            _ctx.Posts.Update(post);
+            return true;
         }
-        public async Task<bool> SaveChangesAsync()
+        else
         {
-            if (await _ctx.SaveChangesAsync() > 0)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return false;
         }
     }
+}
 }
